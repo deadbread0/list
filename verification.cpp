@@ -7,7 +7,7 @@ void CheckFile(const char* filee_name)
 {
     if (filee_name == nullptr)
     {
-        printf("file %s didn't open\n", filee_name);
+        printf("file %s didn't open, try again\n", filee_name);
         exit(1);
     }
 }
@@ -16,7 +16,7 @@ void CheckNewMemory(int* memory)
 {
     if (memory == nullptr)
     {
-        printf("Memory allocation memory\n");
+        printf("Memory allocation memory, try again\n");
         exit(1);
     }
 }

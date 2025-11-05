@@ -17,13 +17,13 @@ int main(const int argc, const char* argv[])
     CheckFile(filee_name);
     InputFromFile(filee_name, &list);
     FillList(&list);
+    int fun_counter = 0;
 
-    OutputForCheck(&list, filee);
-    // EnterElementAfterIndex(&list, 1112, 8);
-    // OutputForCheck(&list, filee);
-    DeleteNextElement(&list, 7);
-    OutputForCheck(&list, filee);
-    //system("dot -Tpng -O dump.txt");
+    OutputForCheck(&list, filee, fun_counter);
+    DeleteNextElement(&list, 5, &fun_counter, filee);
+    // EnterElementAfterIndex(&list, 1112, 3, &fun_counter, filee);
+    DeleteNextElement(&list, 5, &fun_counter, filee);
+    Outputhtml(fun_counter);
     DestroyList(&list);
 
     return 0;

@@ -10,6 +10,7 @@ struct list_t {
     int capacity;
 };
 
-void EnterElementAfterIndex(list_t* list, int element, int position);
-void DeleteNextElement(list_t* list, int index);
+void EnterElementAfterIndex(list_t* list, int element, int position, int* counter, FILE* filee);
+void DeleteNextElement(list_t* list, int index, int* counter, FILE* filee);
 void AddMemory(list_t* list);
+void OutputForCheck(list_t* list, FILE* filee, int counter);

@@ -39,11 +39,17 @@ void FillList(list_t* list)
     assert(list != nullptr);
     int size = list->size;
 
-    for (int i = 1; i < size - 1; i++)
+    for (int i = 1; i < list->capacity; i++)
     {
         list->next[i] = i + 1;
+    }
+
+    for (int i = 1; i < size - 1; i++)
+    {
+        
         list->prev[i] = i - 1;
     }
+
     list->next[size - 1] = 0;
     list->prev[size - 1] = size - 2;
     list->free = size;
@@ -68,6 +74,15 @@ void AddMemory(list_t* list)
         int* new_data = (int*)realloc(list->data, (2 * capacity) * sizeof(int));
         CheckNewMemory(new_data);
         list->data = new_data;
+
+        int* new_next = (int*)realloc(list->next, (2 * capacity) * sizeof(int));
+        CheckNewMemory(new_next);
+        list->next = new_next;
+
+        int* new_prev = (int*)realloc(list->prev, (2 * capacity) * sizeof(int));
+        CheckNewMemory(new_prev);
+        list->prev = new_prev;
+
         list->capacity = 2 * capacity;
     }
 }

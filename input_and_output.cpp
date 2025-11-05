@@ -4,6 +4,7 @@
 
 #include "input_and_output.h"
 
+
 void InputFromFile(const char* filee_name, list_t* list)
 {
     assert(filee_name != nullptr);
@@ -25,12 +26,11 @@ void InputFromFile(const char* filee_name, list_t* list)
         list->data[list->size] = num;
         list->size++;
     }
-    //list->size = i;
     list->prev[0] = list->size - 1;
 }
 
 
-void OutputForCheck(list_t* list, FILE* filee)
+void OutputForCheck(list_t* list, FILE* filee, int counter)
 {
     assert(list != nullptr);
     assert(filee != nullptr);
@@ -57,7 +57,6 @@ void OutputForCheck(list_t* list, FILE* filee)
     fprintf(filee, "%d\n",last);
 
     fprintf(filee, "edge[weight=0, color = green];\n");
-    // fprintf(filee, "%d: <f0> -> ", 0);
 
     for (int i = 0; list->next[i] != 0; i = list->next[i])//стрелки next
     {
@@ -67,7 +66,6 @@ void OutputForCheck(list_t* list, FILE* filee)
     fprintf(filee, "%d\n", list->next[last]);
 
     fprintf(filee, "edge[weight=1, color = red];\n");
-    //fprintf(filee, "%d: <f1> -> %d: <f1> -> ", 0, list->prev[1]);
 
     for (int i = list->prev[0]; list->prev[i] != 0; i = list->prev[i])//стрелки prev
     {
@@ -77,7 +75,40 @@ void OutputForCheck(list_t* list, FILE* filee)
     fprintf(filee, "%d\n", list->prev[last]);
 
     fprintf(filee, "}\n");
-    // sprintf
+}
+
+void Outputhtml(int fun_counter)
+{
+    FILE* filee_html = fopen("HTML_FILE.htm", "w");////
+
+    fprintf(filee_html, 
+            "<!DOCTYPE html>\n"
+            "<html lang=\"en\">\n"
+            "<head>\n"
+            "\t<meta charset=\"UTF-8\">\n"
+            "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+            "\t<title>Struct of data: list</title>\n"
+            "\t<style>\n"
+            "\timg {\n"
+            "\t\tmax-width: 100%%;\n"
+            "\t\theight: auto;\n"
+            "\t\tdisplay: block;\n"
+            "\t}\n"
+            "\t</style>\n"
+            "</head>\n"
+            "<body>\n"
+            "\t<h1>Debug page</h1>\n");
+
+    fprintf(filee_html, "\t\t<p>dump call: %d</p>\n", 1);
+    fprintf(filee_html, "\t\t<img src=\"dump.txt.png\" alt=\"graph%d\" class=\"img\">\n", 1);
+    for (int i = 2; i <= fun_counter + 1; i++)
+    {
+        fprintf(filee_html, "\t\t<p>dump call: %d</p>\n", i);
+        fprintf(filee_html, "\t\t<img src=\"dump.txt.%d.png\" alt=\"graph%d\" class=\"img\">\n", i, i);
+    }
+
+    fprintf(filee_html, "</body>\n</html>\n");
+    fclose(filee_html);
 }
 
 
